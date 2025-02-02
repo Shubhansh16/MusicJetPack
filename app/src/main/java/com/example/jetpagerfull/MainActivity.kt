@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpagerfullTheme {
-                HomePage()
+                MainScreen()
             }
         }
     }
