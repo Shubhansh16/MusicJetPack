@@ -1,8 +1,10 @@
 package com.example.jetpagerfull
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,9 +32,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.materialIcon
 import androidx.compose.material3.AlertDialogDefaults.shape
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,6 +54,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -82,8 +93,8 @@ fun HomePage() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(Color.LightGray)
-            .padding(top = 40.dp, start = 25.dp, end = 25.dp, bottom = 20.dp)
+            .background(color = Color.Black)
+            .padding(top = 40.dp, start = 25.dp, end = 25.dp, bottom = 100.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -92,7 +103,7 @@ fun HomePage() {
             Text(
                 modifier = Modifier.padding(start = 10.dp,top = 5.dp),
                 text = "Music",
-                color = Color.Black,
+                color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Monospace,
                 fontSize = 20.sp
@@ -102,13 +113,13 @@ fun HomePage() {
 
             Icon(
                 modifier = Modifier.size(30.dp),
-                painter = painterResource(id = R.drawable.noti),
+                imageVector = Icons.Filled.Notifications,
                 contentDescription = "Notification"
             )
 
             Icon(
                 modifier = Modifier.size(30.dp),
-                painter = painterResource(id = R.drawable.search),
+                imageVector = Icons.Filled.Search,
                 contentDescription = "Notification"
             )
 
@@ -128,7 +139,7 @@ fun HomePage() {
             }
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -200,13 +211,13 @@ fun HomePage() {
                 )
             }
 
-            Spacer(modifier = Modifier.width(125.dp))
+            Spacer(modifier = Modifier.width(135.dp))
 
             Icon(
                 modifier = Modifier
                     .size(30.dp)
                     .align(Alignment.CenterVertically),
-                painter = painterResource(id = R.drawable.arrow),
+                imageVector = Icons.Filled.AddCircle,
                 contentDescription = "Arrow",
             )
         }
@@ -263,7 +274,7 @@ fun HomePage() {
                 modifier = Modifier
                     .size(50.dp)
                     .clip(RoundedCornerShape(10.dp))
-                    .background(color = Color.Black, shape = RectangleShape),
+                    .background(color = Color.Blue, shape = RectangleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -300,6 +311,10 @@ fun HomePage() {
                 RowItem2(dataImage = item)
             }
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        CardHolder()
 
     }
 }
@@ -525,7 +540,7 @@ fun RowItem2(dataImage: DataImage) {
             Text(
                 text = "Hindi Radio",
                 fontWeight = FontWeight.Medium,
-                color = Color.Black,
+                color = Color.White,
                 style = MaterialTheme.typography.labelMedium
             )
 
@@ -535,9 +550,235 @@ fun RowItem2(dataImage: DataImage) {
             fontWeight = FontWeight.Medium,
             modifier = Modifier
                 .width(80.dp),
-            color = Color.Black,
+            color = Color.White,
             style = MaterialTheme.typography.labelSmall
         )
+    }
+}
+
+
+@Preview
+@Composable
+private fun CardHolder() {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+            .height(530.dp).padding(8.dp)
+    ) {
+        Column(
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(10.dp)
+            ) {
+                Image(
+                    modifier = Modifier.height(100.dp)
+                        .clip(RoundedCornerShape(5.dp)),
+                    painter = painterResource(id = R.drawable.rock),
+                    contentDescription = null,
+                )
+
+                Column{
+
+                    Text(
+                        modifier = Modifier.padding(top = 10.dp, start = 5.dp),
+                        text = "Retro Grooves:",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(start = 5.dp),
+                        text = "Bollywood",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(top = 5.dp,start = 5.dp),
+                        text = "YouTube Music",
+                        fontWeight = FontWeight.Light,
+                        fontSize = 14.sp
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(start = 5.dp),
+                        text = "50 songs",
+                        fontWeight = FontWeight.Light,
+                        fontSize = 14.sp
+                    )
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(10.dp),
+                text = "Listen to these classic Bollywood bangers and get ready to set the floor on fire!"
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+               modifier = Modifier.fillMaxWidth().padding(10.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.rock),
+                    modifier = Modifier.height(60.dp),
+                    contentDescription = null
+                )
+
+                Column {
+
+                    Text(
+                        modifier = Modifier.padding(top = 10.dp, start = 5.dp),
+                        text = "Om Shanti Om- Meri Umar ke Naujawano",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 15.sp
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(start = 5.dp),
+                        text = "Kishore Kumar * 2.6 crore plays",
+                        fontWeight = FontWeight.Light,
+                        fontSize = 15.sp
+                    )
+                }
+
+                Icon(
+                    modifier = Modifier
+                        .height(20.dp)
+                        .align(Alignment.CenterVertically),
+                    imageVector = Icons.Filled.MoreVert,
+                    contentDescription = "Vert",
+                )
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(10.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.rock),
+                    modifier = Modifier.height(60.dp),
+                    contentDescription = null
+                )
+
+                Column {
+
+                    Text(
+                        modifier = Modifier.padding(top = 10.dp, start = 5.dp),
+                        text = "Rang Barse Bheegi Chunarwali",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 15.sp
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(start = 5.dp),
+                        text = "Amitabh bachchan * 79 Lakh plays",
+                        fontWeight = FontWeight.Light,
+                        fontSize = 15.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(40.dp))
+
+                Icon(
+                    modifier = Modifier
+                        .height(15.dp)
+                        .align(Alignment.CenterVertically),
+                    imageVector = Icons.Filled.MoreVert,
+                    contentDescription = "Vert",
+                )
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(10.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.rock),
+                    modifier = Modifier.height(60.dp),
+                    contentDescription = null
+                )
+
+                Column(
+
+                ) {
+
+                    Text(
+                        modifier = Modifier.padding(top = 10.dp, start = 5.dp),
+                        text = "Jai Jai Shiv Shankar",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 15.sp
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(start = 5.dp, end = 15.dp),
+                        maxLines = 1,
+                        text = "Lata Mangeshkar,Kishore Kumar * 3.8 lakh plays",
+                        fontWeight = FontWeight.Light,
+                        fontSize = 15.sp
+                    )
+                }
+
+                Icon(
+                    modifier = Modifier
+                        .height(10.dp),
+                    imageVector = Icons.Filled.MoreVert,
+                    contentDescription = "Vert",
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(10.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape, )
+                    .background(color = Color.Transparent, shape = CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .height(30.dp),
+                    imageVector = Icons.Filled.PlayArrow,
+                    contentDescription = "Vert",
+                )
+            }
+
+            Spacer(modifier = Modifier.width(20.dp))
+
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape, )
+                    .background(color = Color.Transparent, shape = CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .height(30.dp),
+                    imageVector = Icons.Filled.Favorite,
+                    contentDescription = "Vert",
+                )
+            }
+
+            Spacer(modifier = Modifier.width(20.dp))
+
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape, )
+                    .background(color = Color.Transparent, shape = CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .height(30.dp),
+                    imageVector = Icons.Filled.ThumbUp,
+                    contentDescription = "Vert",
+                )
+            }
+        }
     }
 }
 

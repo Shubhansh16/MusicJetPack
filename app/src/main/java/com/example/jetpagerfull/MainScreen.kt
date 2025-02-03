@@ -1,5 +1,6 @@
 package com.example.jetpagerfull
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 
 
@@ -40,7 +42,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
     Scaffold(
         modifier=Modifier.fillMaxSize(),
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                modifier = Modifier.background(Color.Black)
+            ) {
                 navItemList.forEachIndexed { index, bottomNavItem ->
                      NavigationBarItem(
                          label = {
@@ -66,7 +70,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 fun ContentScreen(modifier: Modifier = Modifier,selectedIndex:Int) {
     when(selectedIndex){
         0-> HomePage()
-        1-> SamplePage()
+        1-> SamplePage(MusicVideoViewModel())
         2-> ExplorePage()
         4-> LibraryPage()
     }
