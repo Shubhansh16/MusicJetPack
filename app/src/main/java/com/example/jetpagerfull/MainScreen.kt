@@ -1,5 +1,6 @@
 package com.example.jetpagerfull
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
@@ -61,17 +63,20 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 }
             }
         }
+
     ) { innerPadding ->
         ContentScreen(modifier=Modifier.padding(innerPadding),selectedIndex)
     }
 }
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun ContentScreen(modifier: Modifier = Modifier,selectedIndex:Int) {
     when(selectedIndex){
         0-> HomePage()
         1-> SamplePage(MusicVideoViewModel())
         2-> ExplorePage()
-        4-> LibraryPage()
+        3-> LibraryPage()
     }
 }
+

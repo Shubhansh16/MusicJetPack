@@ -8,61 +8,61 @@ class MusicVideoViewModel : ViewModel() {
     private val _videos = MutableLiveData(
         listOf(
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+               "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail1.jpg",
                 title = "Song 1",
                 subtitle = "Artist 1"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"
             ),
             Video(
-                videoUrl = "https://www.youtube.com/watch?v=VaKzNtwPQxE",
+                videoUrl = "https://file-examples.com/storage/fed070a54267a0d1f9ebf9a/2017/04/file_example_MP4_1280_10MG.mp4",
                 thumbnailUrl = "https://www.example.com/thumbnail2.jpg",
                 title = "Song 2",
                 subtitle = "Artist 2"

@@ -1,6 +1,10 @@
 package com.example.jetpagerfull
 
-import android.graphics.drawable.Icon
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,13 +12,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-
-
-
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
@@ -34,35 +33,30 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material.icons.materialIcon
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -85,6 +79,7 @@ public object utils{
 }
 
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Preview
 @Composable
 fun HomePage() {
@@ -158,7 +153,7 @@ fun HomePage() {
         Text(
             modifier = Modifier.padding(start = 10.dp),
             text = "Quick Picks",
-            color = Color.Black,
+            color = Color.White,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Serif,
             fontSize = 16.sp
@@ -315,7 +310,28 @@ fun HomePage() {
         Spacer(modifier = Modifier.height(20.dp))
 
         CardHolder()
+        var showDetails by remember { mutableStateOf(false) }
+        SharedTransitionLayout {
+            AnimatedContent(
+                showDetails,
+                label = "basic",
+            ) { targetState ->
+                if (!targetState){
+                    RowList(
+                        onShowDetails = {
+                            showDetails=true
+                        },
+                        animatedVisibilityScope = this@AnimatedContent,
+                        sharedTransitionScope = this@SharedTransitionLayout
+                    )
+                } else{
+                    DetailScreen(
 
+                    )
+                }
+            }
+        }
+        //RowList()
     }
 }
 
@@ -561,17 +577,21 @@ fun RowItem2(dataImage: DataImage) {
 @Composable
 private fun CardHolder() {
     Card(
-        modifier = Modifier.fillMaxWidth()
-            .height(530.dp).padding(8.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(530.dp)
+            .padding(8.dp)
     ) {
         Column(
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(10.dp)
             ) {
                 Image(
-                    modifier = Modifier.height(100.dp)
+                    modifier = Modifier
+                        .height(100.dp)
                         .clip(RoundedCornerShape(5.dp)),
                     painter = painterResource(id = R.drawable.rock),
                     contentDescription = null,
@@ -617,7 +637,9 @@ private fun CardHolder() {
             Spacer(modifier = Modifier.height(10.dp))
 
             Row(
-               modifier = Modifier.fillMaxWidth().padding(10.dp)
+               modifier = Modifier
+                   .fillMaxWidth()
+                   .padding(10.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.rock),
@@ -652,7 +674,9 @@ private fun CardHolder() {
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(10.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.rock),
@@ -689,7 +713,9 @@ private fun CardHolder() {
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Image(
@@ -728,12 +754,14 @@ private fun CardHolder() {
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().padding(10.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
         ) {
             Box(
                 modifier = Modifier
                     .size(50.dp)
-                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape, )
+                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape,)
                     .background(color = Color.Transparent, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
@@ -750,7 +778,7 @@ private fun CardHolder() {
             Box(
                 modifier = Modifier
                     .size(50.dp)
-                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape, )
+                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape,)
                     .background(color = Color.Transparent, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
@@ -767,7 +795,7 @@ private fun CardHolder() {
             Box(
                 modifier = Modifier
                     .size(50.dp)
-                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape, )
+                    .border(border = BorderStroke(2.dp, color = Color.Black), shape = CircleShape,)
                     .background(color = Color.Transparent, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
@@ -780,6 +808,67 @@ private fun CardHolder() {
             }
         }
     }
+}
+
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+
+@Composable
+private fun RowList(
+    onShowDetails: () -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
+) {
+                Row(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                ) {
+                    Row {
+                        with(sharedTransitionScope) {
+                            Image(
+                                modifier = Modifier
+                                    .width(50.dp)
+                                    .height(50.dp)
+                                    .sharedElement(rememberSharedContentState(key = "image"),
+                                        animatedVisibilityScope=animatedVisibilityScope
+                                    ),
+                                painter = painterResource(id = R.drawable.rock),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.width(15.dp))
+
+                        Column(
+                            modifier = Modifier.padding(top = 8.dp)
+                        ) {
+                            Text(
+                                text = "Kun Faya Kun",
+                                fontWeight = FontWeight.Medium,
+                                color = Color.White,
+                                style = MaterialTheme.typography.labelMedium
+                            )
+                            Text(
+                                text = "A.R. Rahman, Javed Ali & Mohit Chauhan",
+                                fontWeight = FontWeight.Light,
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodySmall
+                            )
+
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.width(160.dp))
+
+                    Icon(
+                        imageVector = Icons.Filled.MoreVert,
+                        modifier = Modifier.padding(top = 10.dp),
+                        contentDescription = null
+                    )
+                }
 }
 
 
